@@ -16,8 +16,8 @@ llm = ChatGoogleGenerativeAI(
 
 # Prompt template
 prompt_template = """
-    Answer the question as detailed as possible from the provided context, make sure to provide all the details in a nicely formatted point form. If the answer is not in
-    the provided context, provide additional information from your knowledge base.\n\n
+    Answer the question as detailed as possible from the provided context, make sure to provide all the details in a nicely formatted point form. if the answer is not in
+    provided context just say, "answer is not available in the context", don't provide the wrong answer\n\n
     Context:\n {context}?\n
     Question: \n{question}\n
 
@@ -88,7 +88,14 @@ def main():
                 {"input_documents": docs, "question": user_input},
                 return_only_outputs=True,
             )
-            st.write(f"{response['output_text']}")
+            if "context" in response["output_text"]:
+                # print(llm.invoke("Sing a ballad of LangChain."))
+                st.write(
+                    f"<h6 style=color: white;'>{llm.invoke(f'Proton Saga, {user_input}.')}</h1>",
+                    unsafe_allow_html=True,
+                )
+            else:
+                st.write(f"{response['output_text']}")
 
 
 if __name__ == "__main__":
