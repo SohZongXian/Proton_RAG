@@ -22,7 +22,7 @@ graph LR
     E --> A
     F[PDF Document] -->|generate_embeddings| G[Document Embeddings]
     G -->|VectorStore| C
-
+```
 Usage
 To use the chatbot, you need to have the following prerequisites:
 
