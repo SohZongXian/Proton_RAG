@@ -16,8 +16,8 @@ llm = ChatGoogleGenerativeAI(
 
 # Prompt template
 prompt_template = """
-    Answer the question as detailed as possible from the provided context, make sure to provide all the details in a nicely formatted point form, if the answer is not in
-    provided context, provide information without the context.\n\n
+    Answer the question as detailed as possible from the provided context, make sure to provide all the details in a nicely formatted point form. If the answer is not in
+    the provided context, provide additional information from your knowledge base.\n\n
     Context:\n {context}?\n
     Question: \n{question}\n
 
