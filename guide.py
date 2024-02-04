@@ -7,11 +7,11 @@ from PyPDF2 import PdfReader
 from langchain.prompts import PromptTemplate
 import streamlit as st
 
-genai.configure(api_key="AIzaSyAAqY4CJmiBqWRRf5qzsvDqruvn740zzR4")
+genai.configure(api_key=st.secrets["api_key"])
 
 # Chat model initialization
 llm = ChatGoogleGenerativeAI(
-    model="gemini-pro", google_api_key="AIzaSyAAqY4CJmiBqWRRf5qzsvDqruvn740zzR4"
+    model="gemini-pro", google_api_key=st.secrets["api_key"]
 )
 
 # Prompt template
@@ -49,7 +49,7 @@ def get_text_chunks(text):
 def get_vector_store(text_chunks):
     embeddings = GoogleGenerativeAIEmbeddings(
         model="models/embedding-001",
-        google_api_key="AIzaSyAAqY4CJmiBqWRRf5qzsvDqruvn740zzR4",
+        google_api_key=st.secrets["api_key"],
     )
     vectorstore = FAISS.from_texts(text_chunks, embedding=embeddings)
     vectorstore.save_local("faiss_index")
@@ -80,7 +80,7 @@ def main():
         with st.spinner("Generating Answer..."):
             embeddings = GoogleGenerativeAIEmbeddings(
                 model="models/embedding-001",
-                google_api_key="AIzaSyAAqY4CJmiBqWRRf5qzsvDqruvn740zzR4",
+                google_api_key=st.secrets["api_key"],
             )
             new_db = FAISS.load_local("faiss_index", embeddings)
             docs = new_db.similarity_search(user_input)
