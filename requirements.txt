@@ -1,3 +1,4 @@
+faiss-cpu
 beautifulsoup4
 langchain
 langchain_community
@@ -10,4 +11,3 @@ PyPDF2
 Requests
 selenium
 streamlit
-faiss-cpu
